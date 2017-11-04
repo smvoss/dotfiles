@@ -1,0 +1,61 @@
+#!/usr/bin/env python
+
+import argparse
+import os
+
+from bs_tools.tools import validating_user_input, load_dotfiles
+from bs_tools import bootstrap_opts
+
+IGNORE = [
+    'bs_tools/*',
+    'bootstrap',
+    '.gitignore',
+    '.git/*',
+    '.idea/*',
+    '*~'
+]
+
+
+def symlink_files():
+    overwrite_all = False
+    files = load_dotfiles(IGNORE)
+    for file in files:
+        opts = bootstrap_opts.parse_opts(file)
+        filename = os.path.basename(file)
+        file = os.path.dirname(os.path.abspath(__file__)) + "/" + file
+
+        for opt, fcn in bootstrap_opts.BOOTSTRAP_OPTS:
+            val = opts.get(opt, False)
+            if val:
+                filename = fcn(filename, val)
+
+        print("Preparing to symlink " + file + " to " + filename)
+
+        if os.path.lexists(filename):
+            if not overwrite_all:
+                inpt = validating_user_input("{filename} exists. Overwrite?".format(
+                    filename=filename
+                ))
+
+                if inpt == 'n':
+                    print("Symlink aborted.\n")
+                    continue  # go to next file
+                if inpt == 'a':
+                    overwrite_all = True
+
+            os.remove(filename)
+
+        filepath = os.path.dirname(filename)
+        if not os.path.exists(filepath):
+            os.mkdir(filepath)
+
+        os.symlink(file, filename)
+        print("Symlink created!\n")
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-s', '--symlink', action='store_true')
+    args = parser.parse_args()
+    if args.symlink:
+        symlink_files()

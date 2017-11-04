@@ -1,0 +1,2 @@
+[[ -f ~/.Xdefaults ]] && xrdb -merge ~/.Xdefaults
+exec i3 

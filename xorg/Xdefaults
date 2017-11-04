@@ -1,0 +1,48 @@
+#define NO_THEME 0
+#define CHILL  1
+
+#define THEME CHILL
+
+#if THEME == CHILL
+#include "/home/sxvoss/.config/themes/chill"
+#else
+    #error "Undefined or unknown theme"
+#endif
+
+! default colors
+*.foreground:   FOREGROUND
+*.background:   BACKGROUND
+*.cursorColor:  CURSORCOLOR
+*.color0:       COLOR0
+*.color8:       COLOR8
+*.color1:       COLOR1
+*.color9:       COLOR9
+*.color2:       COLOR2
+*.color10:      COLOR10
+*.color3:       COLOR3
+*.color11:      COLOR11
+*.color4:       COLOR4
+*.color12:      COLOR12
+*.color5:       COLOR5
+*.color13:      COLOR13
+*.color6:       COLOR6
+*.color14:      COLOR14
+*.color7:       COLOR7
+*.color15:      COLOR15
+
+!!!!! URXvt
+*.font: xft:SourceCodePro:size=11
+!*.letterSpace: -4
+!*.font: xft:DejaVu Sans Mono Bold Nerd Font Complete Mono:size=10
+URxvt*scrollBar: false
+URxvt*urlLauncher: firefox
+
+!!!!! Rofi
+rofi.color-enabled: true
+
+!                    background   border   seperator
+rofi.color-window:   BACKGROUND,  COLOR7,  COLOR5
+!                    background   foreground   bgalt    hlbg      hlfg
+rofi.color-normal:   BACKGROUND,  FOREGROUND,  COLOR0,  COLOR14,  COLOR0
+rofi.color-active:   BACKGROUND,  FOREGROUND,  COLOR0,  COLOR14,  COLOR0
+rofi.color-urgent:   BACKGROUND,  FOREGROUND,  COLOR0,  COLOR14,  COLOR0

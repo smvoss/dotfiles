@@ -1,0 +1,284 @@
+# Dotfile install location and names, to be parsed by bootstrap
+#   install-dir $HOME/.config/polybar
+
+[colors]
+;background = ${xrdb:color0:#222}
+background = #00222222
+background-alt = #444
+;foreground = ${xrdb:color7:#222}
+foreground = #dfdfdf
+foreground-alt = #555
+primary = #5f819d
+secondary = #e60053
+alert = #bd2c40
+
+[bar/main-topbar]
+monitor = DVI-I-1
+width = 100%
+height = 22
+;offset-x = 1%
+;offset-y = 1%
+radius = 0
+fixed-center = true
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 2
+line-color = #f00
+
+border-size = 0
+border-color = #00000000
+
+padding-left = 0
+padding-right = 2
+
+module-margin-left = 1
+module-margin-right = 0
+
+#font-0 = Hack:pixelsize=10;2
+font-0 = SourceCodePro:pixelsize=11;2
+#font-0 = DejaVu Sans Mono for Powerline Nerd Font Complete Mono;pixelsize=10;2
+#font-0 = Nerd Font Source Code Pro:pixelsize=10;2
+#font-2 = FontAwesome:pixelsize=10;2
+#font-0 = fixed:pixelsize=10;1
+#font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
+#font-2 = siji:pixelsize=10;1
+
+modules-left = i3
+modules-center = date
+modules-right = filesystem filesystem2 volume memory cpu temperature powermenu
+
+tray-position = 
+tray-padding = 2
+;tray-transparent = true
+;tray-background = #0063ff
+
+;wm-restack = bspwm
+;wm-restack = i3
+
+;override-redirect = true
+
+;scroll-up = bspwm-desknext
+;scroll-down = bspwm-deskprev
+
+;scroll-up = i3wm-wsnext
+;scroll-down = i3wm-wsprev
+
+
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:30:...%
+
+[module/filesystem]
+type = internal/fs
+interval = 25
+
+mount-0 = /
+
+label-mounted = %{F#5f819d}%mountpoint%%{F-}: %percentage_used%%
+label-unmounted = %mountpoint% not mounted
+label-unmounted-foreground = ${colors.foreground-alt}
+
+[module/filesystem2]
+type = internal/fs
+interval = 25
+
+mount-0 = /home
+
+label-mounted = %{F#5f819d}%mountpoint%%{F-}: %percentage_used%%
+label-unmounted = %mountpoint% not mounted
+label-unmounted-foreground = ${colors.foreground-alt}
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false
+
+; Only show workspaces on the same output as the bar
+;pin-workspaces = true
+
+label-mode-padding = 2
+;label-mode-foreground = #000
+;label-mode-background = ${colors.primary}
+
+; focused = Active workspace on focused monitor
+label-focused = %index%
+;label-focused-background = ${module/bspwm.label-focused-background}
+label-focused-underline = #5f819d
+label-focused-padding = 2
+
+; unfocused = Inactive workspace on any monitor
+label-unfocused = %index%
+label-unfocused-padding = 2
+
+; visible = Active workspace on unfocused monitor
+label-visible = %index%
+;label-visible-background = ${self.label-focused-background}
+;label-visible-underline = ${colors.primary}
+label-visible-padding = 2
+
+; urgent = Workspace with urgency hint set
+label-urgent = %index%
+;label-urgent-background = ${module/bspwm.label-urgent-background}
+;label-urgent-padding = ${module/bspwm.label-urgent-padding}
+
+[module/mpd]
+type = internal/mpd
+format-online = <label-song>  <icon-prev> <icon-stop> <toggle> <icon-next>
+
+icon-prev = 
+icon-stop = 
+icon-play = 
+icon-pause = 
+icon-next = 
+
+label-song-maxlen = 25
+label-song-ellipsis = true
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+format-prefix = "CPU "
+format-suffix = " "
+format-prefix-foreground = ${colors.foreground-alt}
+;format-underline = #f90000
+label = %percentage%%
+
+[module/memory]
+type = internal/memory
+interval = 2
+format-prefix = "RAM "
+format-suffix = " "
+format-prefix-foreground = ${colors.foreground-alt}
+;format-underline = #4bffdc
+label = %percentage_used%%
+
+[module/eth]
+type = internal/network
+interface = virbr0-nic
+interval = 3.0
+
+format-connected-underline = #55aa55
+format-connected-prefix = " "
+format-connected-prefix-foreground = ${colors.foreground-alt}
+label-connected = %local_ip%
+
+format-disconnected =
+;format-disconnected = <label-disconnected>
+;format-disconnected-underline = ${self.format-connected-underline}
+;label-disconnected = %ifname% disconnected
+;label-disconnected-foreground = ${colors.foreground-alt}
+
+[module/date]
+type = internal/date
+interval = 5
+
+date =
+date-alt = " %Y-%m-%d"
+
+time = %H:%M
+time-alt = %H:%M:%S
+
+format-prefix-foreground = ${colors.foreground-alt}
+#format-underline = #0a6cf5
+
+label = %date% %time%
+
+[module/volume]
+type = internal/volume
+
+format-volume = <label-volume> <bar-volume>
+label-volume = VOL
+label-volume-foreground = ${root.foreground}
+
+format-muted-prefix = " "
+format-muted-foreground = ${colors.foreground-alt}
+label-muted = sound muted
+
+bar-volume-width = 10
+bar-volume-foreground-0 = ${colors.primary}
+bar-volume-foreground-1 = ${colors.primary}
+bar-volume-foreground-2 = ${colors.primary}
+bar-volume-foreground-3 = ${colors.primary}
+bar-volume-foreground-4 = ${colors.primary}
+bar-volume-foreground-5 = ${colors.primary}
+bar-volume-foreground-6 = ${colors.primary}
+bar-volume-gradient = false
+bar-volume-indicator = |
+bar-volume-indicator-font = 2
+bar-volume-fill = ─
+bar-volume-fill-font = 2
+bar-volume-empty = ─
+bar-volume-empty-font = 2
+bar-volume-empty-foreground = ${colors.foreground-alt}
+
+[module/temperature]
+type = internal/temperature
+thermal-zone = 0
+warn-temperature = 60
+
+;format = <ramp> <label>
+;format-underline = #f50a4d
+;format-warn = <ramp> <label-warn>
+;format-warn-underline = ${self.format-underline}
+
+format-prefix = "TEMP "
+format-suffix = " "
+format-prefix-foreground = ${colors.foreground-alt}
+label-warn = %temperature%
+label-warn-foreground = ${colors.secondary}
+
+ramp-0 = 
+ramp-1 =
+ramp-2 =
+ramp-foreground = ${colors.foreground-alt}
+
+[module/powermenu]
+type = custom/menu
+
+format-spacing = 1
+
+label-open = 1
+label-open-foreground = #5f81d9
+label-close = 2 cancel
+label-close-foreground = #5f81d9
+label-separator = |
+label-separator-foreground = ${colors.foreground-alt}
+
+menu-0-0 = reboot
+menu-0-0-exec = menu-open-1
+menu-0-1 = power off
+menu-0-1-exec = menu-open-2
+
+menu-1-0 = cancel
+menu-1-0-exec = menu-open-0
+menu-1-1 = reboot
+menu-1-1-exec = sudo reboot
+
+menu-2-0 = power off
+menu-2-0-exec = sudo poweroff
+menu-2-1 = cancel
+menu-2-1-exec = menu-open-0
+
+[settings]
+screenchange-reload = true
+;compositing-background = xor
+;compositing-background = screen
+;compositing-foreground = source
+;compositing-border = over
+
+[module/coretemps]
+type = custom/script
+exec-if = sensors
+exec = sensors | grep Core | awk '{print substr($3, 2, length($3)-5)}' | tr '\n' ' ' | sed 's/ /°C  /g' | sed 's/  $//'
+format-prefix = " "
+format-suffix = " "
+format-prefix-foreground = ${colors.foreground-alt}
+
+[global/wm]
+margin-top = 5
+margin-bottom = 5
+
+; vim:ft=dosini
