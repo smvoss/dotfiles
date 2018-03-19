@@ -1,0 +1,12 @@
+alias track_ascii_notes="noglob find ~/notes -name \"*asciidoc\" -not -name \"*~\" -not -name \"*swp\" | entr asciidoctor /_ -D ~/www/notes >> ~/logs/track_ascii_notes.log 2>&1"
+
+# check if entr is running, and dump the response (checking return value)
+# TODO: this should be enable/disableable, it will fail if entr is not installed, or if ~/notes, or ~/www do not exist
+#ps aux | grep [e]ntr >> /dev/null 2>&1
+#if [ $? -eq 0 ]; then
+#→→→→→→→→# its running, do nothing
+#else
+#→→→→→→→→# its not running, start it
+#→→→→→→→noglob find ~/notes -name "*asciidoc" -not -name "*~" -not -name "*swp" | nohup entr asciidoctor /_ -D ~/www/notes 2>&1 > /dev/null &
+
+#fi
