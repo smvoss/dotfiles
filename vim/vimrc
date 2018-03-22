@@ -2,6 +2,22 @@
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
+" Start plug to install plugins
+call plug#begin('~/.vim/plugged')
+
+" https://github.com/kshenoy/vim-signature
+Plug 'kshenoy/vim-signature'
+
+" https://github.com/vim-airline/vim-airline
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+" End plug callotus
+call plug#end()
+
+" random default color scheme, until I edit one
+colorscheme desert
+
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
