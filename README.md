@@ -16,7 +16,7 @@ Certain options may be provided as comments at the top of dotfiles. These option
 | Option Name   | Description     | Usage  |
 | ------------- | --------------- | ------ |
 | `install-dir` | Location to install dotfile. Will default to $HOME | `install-dir /path/to/file` |
-| `hidden`      | Whether the file should be created as a hidden file | `hidden <true | false> |
+| `hidden`      | Whether the file should be created as a hidden file | `hidden <true \| false>` |
 
 ## Example: fzf plugin
 
