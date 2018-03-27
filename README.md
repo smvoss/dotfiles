@@ -29,15 +29,4 @@ fzf plugins go in a subfolder, `~/.fzf`, and should be installed as such. This c
 
 # Ignored files and folders
 
-Not everything should be installed, so a blacklist is created. The default blacklist can be found in the bootstrap, defined as:
-
-```python
-IGNORE = [
-    'bs_tools/*',
-    'bootstrap',
-    '.gitignore',
-    '.git/*',
-    '.idea/*',
-    '*~'
-]
-```
+Not everything should be installed, so a blacklist is created. The default blacklist can be found in the bootstrap, defined as an array named `IGNORE`.
