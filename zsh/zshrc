@@ -56,7 +56,7 @@ new_cd () {
 	fi
 }
 
-for file in ~/*.zrc; do
+for file in ~/.*.zrc; do
 	source $file
 done
 
