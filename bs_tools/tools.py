@@ -1,6 +1,6 @@
 import os
 import fnmatch
-import glob
+import glob2 as glob
 
 
 def filter_files(file, filter_arr):
