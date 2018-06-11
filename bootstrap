@@ -14,7 +14,7 @@ IGNORE = [
     '.git/*',
     '.idea/*',
     '*~',
-    "venv/*"
+    'venv/*'
 ]
 
 
