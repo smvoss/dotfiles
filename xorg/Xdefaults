@@ -31,7 +31,7 @@
 *.color15:      COLOR15
 
 !!!!! URXvt
-*.font: xft:SourceCodePro:size=11
+URxvt.font: xft:SourceCodePro:size=11
 !*.letterSpace: -4
 !*.font: xft:DejaVu Sans Mono Bold Nerd Font Complete Mono:size=10
 URxvt*scrollBar: false
