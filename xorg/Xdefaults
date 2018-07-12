@@ -4,7 +4,7 @@
 #define THEME CHILL
 
 #if THEME == CHILL
-#include "/home/sxvoss/.config/themes/chill"
+#include "/home/smvoss/.config/themes/chill"
 #else
     #error "Undefined or unknown theme"
 #endif

@@ -3,6 +3,8 @@
 # Dotfile install location and names, to be parsed by bootstrap
 #   install-dir $HOME/.config/polybar
 
+MONITOR=$(polybar -m|tail -1|sed -e 's/:.*$//g')
+
 # Terminate already running bar instances
 killall -q polybar
 
