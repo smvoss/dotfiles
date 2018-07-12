@@ -1,0 +1,3 @@
+[submodule "dotfile-bootstrap"]
+	path = dotfile-bootstrap
+	url = https://github.com/smvoss/dotfile-bootstrap.git

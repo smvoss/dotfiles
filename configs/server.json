@@ -1,0 +1,9 @@
+{
+  "no_install_file": [
+    "xorg/xinitrc"
+  ],
+  "no_install_folder": [
+    "i3",
+    "polybar"
+  ]
+}
