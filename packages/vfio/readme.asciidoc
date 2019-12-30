@@ -1,0 +1,130 @@
+= VFIO
+
+Quick TL;DR to reinstall my VFIO setup.
+
+== Blacklist GPU
+
+./etc/modprobe.d/vfio.conf
+----
+options vfio-pci ids=10de:1b81,10de:10f0
+----
+
+./etc/mkinitcpio.conf
+----
+MODULES="vfio vfio_iommu_type1 vfio_pci vfio_virqfd"
+
+[...]
+
+# add modconf to the existing list
+HOOKS=(... modconf ...)
+----
+
+After these changes, initramfs must be regenerated:
+
+.regenerate initramfs
+----
+sudo mkinitcpio -p linux
+----
+
+== Enable iommu for kernel during boot
+
+This will depend on your bootloader, using systemd-boot I created
+`/boot/loader/entries/arch.conf` which I can just append `intel_iommu=on` to
+the boot args.
+
+== Install Virtualization Tools
+
+QEMU has a bug with audio crackling, and to avoid that I want to pick up the
+aur package `qemu-patched`, however `qemu-patched` builds for all architectures.
+To avoid this, instead of using any aur tools, just install it by hand:
+
+----
+wget https://aur.archlinux.org/cgit/aur.git/snapshot/qemu-patched.tar.gz
+tar xf qemu-patched.tar.gz
+
+gpg --recv-key 3353C9CEF108B584
+
+cd qemu-patched.tar.gz
+patch -p1 < 0001-Only-build-for-x86_64-softmmu.patch
+
+makepkg -si
+----
+
+.0001-Only-build-for-x86_64-softmmu.patch
+----
+From d8056d80a45fe410202941056532f85b9be8fb25 Mon Sep 17 00:00:00 2001
+From: Sam Voss <sam.voss@gmail.com>
+Date: Thu, 22 Nov 2018 16:40:58 -0600
+Subject: [PATCH] Only build for x86_64-softmmu
+
+---
+ PKGBUILD | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/PKGBUILD b/PKGBUILD
+index 2256938..ccfbd17 100644
+--- a/PKGBUILD
++++ b/PKGBUILD
+@@ -89,6 +89,7 @@ _build() (
+     --with-sdlabi=2.0 \
+     --enable-modules \
+     --enable-jemalloc \
++    --target-list=x86_64-softmmu \
+     "${@:2}"
+
+   make
+--
+2.19.1
+----
+
+Note, makepkg -si will build all and then fail. From there you will have to install
+the correct package with `sudo pacman -U qemu-patched-X.X.X.X-x86_64.pkg.tar.xz`
+
+TODO: investigate if this is easier to do
+
+
+Install the rest of the tools which will be used along with qemu:
+
+----
+sudo pacman -S libvirt ovmf virt-manager dmidecode
+----
+
+see networking below for more packages
+
+=== virt-manager
+
+----
+sudo virt-manager
+----
+
+.import vm from xml
+----
+sudo virsh define win10.xml
+----
+
+To setup network, open virt-manager->edit->connection details->virtual networks->default->autostart on boot (check)
+
+.packages required for starting networking
+----
+sudo pacman -S bridge-utils ebtables dnsmasq
+----
+
+once these have been installed, *restart* libvirtd.service
+
+=== OVMF
+
+./etc/libvirt/qemu.conf
+----
+nvram = [
+	"/usr/share/ovmf/x64/OVMF_CODE.fd:/usr/share/ovmf/x64/OVMF_VARS.fd"
+]
+----
+
+
+
+== Convenience tools
+
+
+----
+pacman -S synergy
+----
