@@ -86,7 +86,7 @@ fzf-grep-widget() {
         "*.tmp",
     )
 
-    selected=( $(grep -r . -I --exclude="{$(IFS=$','; echo "${blacklist[*]}")}" | FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --height 40% --query=${(q)LBUFFER} -n2.. -d:" $(__fzfcmd) ) )
+    selected=( $(rg --no-heading -n . | FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --height 40% --query=${(q)LBUFFER} -n2.. -d:" $(__fzfcmd) ) )
     local ret=$?
 
     file=$(awk -F: '{print $1}' <<< ${selected})

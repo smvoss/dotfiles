@@ -4,6 +4,7 @@
   ],
   "no_install_folder": [
     "i3",
-    "polybar"
+    "polybar",
+    "themes"
   ]
 }
