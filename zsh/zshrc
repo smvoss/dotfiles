@@ -23,6 +23,23 @@ alias find="noglob find"
 
 export LANG=en_US.UTF-8
 
+check_dotfiles_status() {
+	local dotfiles_loc="${HOME}/.dotfiles"
+
+	if [ ! -d ${dotfiles_loc} ]; then
+		echo "Dotfiles not under version control at `${dotfiles_loc}`."
+	fi
+	pushd "${dotfiles_loc}" &> /dev/null
+
+	df_status=$(git status --short)
+	if [ "${df_status}" != "" ]; then
+		echo "Warning! Dotfiles have unsaved changes:"
+		echo "${df_status}"
+	fi
+	popd &> /dev/null
+}
+check_dotfiles_status
+
 ##############################################################################
 # Aliases
 ##############################################################################
