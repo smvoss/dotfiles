@@ -1,1 +1,3 @@
-source ~/.cargo/env
+if [ -d ~/.cargo/env ]; then
+	source ~/.cargo/env
+fi
