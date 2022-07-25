@@ -9,12 +9,12 @@ bindsym $mod+m move workspace to output left
 
 # Font for window titles. Will also be used by the bar unless a different #font
 # is used in the bar {} block below.
-#font pango:monospace 8
+font pango:monospace 8
 #font freetype:Hack 8
 #font hack:normal 
 #font xft:Hack  10
 #font xft:SourceCodePro 10
-font xft:ejaVu Sans Mono for Powerline Nerd Font Complete Mono 
+#font xft:ejaVu Sans Mono for Powerline Nerd Font Complete Mono 
 #font pango:DejaVu Sans Mono 10
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
@@ -150,7 +150,7 @@ bindsym $mod+r mode "resize"
 # launch polybar
 exec_alwayS --no-startup-id $HOME/.config/polybar/launch.sh
 
-exec --no-startup-id compton -b
-exec feh --bg-scale /home/sxvoss/Wallpapers/nathan-anderson-273668.jpg
+#exec --no-startup-id compton -b
+#exec feh --bg-scale /home/sxvoss/Wallpapers/nathan-anderson-273668.jpg
 
 bindsym Mod4+L exec i3lock-fancy

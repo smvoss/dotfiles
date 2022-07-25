@@ -4,7 +4,7 @@
 #define THEME CHILL
 
 #if THEME == CHILL
-#include "/home/sxvoss/.config/themes/chill"
+#include "/home/smvoss/.config/themes/chill"
 #else
     #error "Undefined or unknown theme"
 #endif
@@ -31,9 +31,10 @@
 *.color15:      COLOR15
 
 !!!!! URXvt
-URxvt.font: xft:SourceCodePro:size=11
+!URxvt.font: xft:SourceCodePro:size=11
 !*.letterSpace: -4
 !*.font: xft:DejaVu Sans Mono Bold Nerd Font Complete Mono:size=10
+URxvt.internalBorder: 8
 URxvt*scrollBar: false
 URxvt*urlLauncher: firefox
 

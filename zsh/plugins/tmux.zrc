@@ -1,4 +1,4 @@
-if  command -v tmux; then
+if command -v tmux; then
 	# Auto launch tmux when connecting to terminal
 	if [[ -z "$TMUX" ]]; then
 		tmux has-session &> /dev/null

@@ -58,6 +58,9 @@ if has("autocmd")
     endif
 endfunction
 nmap <F9> mz:execute TabToggle()<CR>'z
+        set shiftwidth=4
+        set softtabstop=4
+set expandtab
 
   " Put these in an autocmd group, so that we can delete them easily.
   augroup vimrcEx
@@ -109,6 +112,25 @@ set listchars=tab:→→
 " if is code: enable highlight-under-cursor
 if (expand('%:e') =~ 'asciidoc' || expand('%:F') =~ 'COMMIT_EDITMSG')
 	setlocal spell
+	setlocal textwidth=119
 else
 	autocmd CursorMoved * exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))
 endif
+
+let maplocalleader = "\<Space>"
+
+autocmd Filetype tex call ncm2#register_source({
+            \ 'name' : 'vimtex-labels',
+            \ 'priority': 8,
+            \ 'complete_length': -1,
+            \ 'scope': ['tex'],
+            \ 'matcher': {'name': 'combine',
+            \             'matchers': [
+            \               {'name': 'substr', 'key': 'word'},
+            \               {'name': 'substr', 'key': 'menu'},
+            \             ]},
+            \ 'word_pattern': '\w+',
+            \ 'complete_pattern': g:vimtex#re#ncm2#labels,
+            \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
+            \ })
+

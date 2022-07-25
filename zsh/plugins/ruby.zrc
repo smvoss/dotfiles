@@ -1,0 +1,5 @@
+environ=$(gem environment | grep "USER INSTALLATION DIRECTORY:" | awk '{ print $5 }')
+if [ ! -z "$environ" ]; then
+	PATH=$PATH:$environ/bin
+	export PATH
+fi

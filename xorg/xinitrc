@@ -1,2 +1,12 @@
-[[ -f ~/.Xdefaults ]] && xrdb -merge ~/.Xdefaults
-exec i3 
+#if [[ -z $DISPLAY && $(tty) == /dev/tty1 ]]; then
+#	echo "attempting i3 session"
+#	[[ -f ~/.Xdefaults ]] && xrdb -merge ~/.Xdefaults
+#	exec i3 
+#fi
+
+#if [[ -z $DISPLAY && $(tty) == /dev/tty2 ]]; then
+	echo "attempting gnome session"
+	export XDG_SESSION_TYPE=x11
+	export GDK_BACKEND=x11
+	exec gnome-session
+#fi
