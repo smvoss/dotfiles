@@ -100,11 +100,6 @@ check_then_source () {
 check_then_source ~/.fzf.zsh
 check_then_source ~/.fzf/shell/key-bindings.zsh
 
-# try the local variant first, so user can swap them out (upgrade) themselves
-if check_then_source ~/.local/bin/virtualenvwrapper.sh; then
-	check_then_source /usr/local/bin/virtualenvwrapper.sh
-fi
-
 unset -f check_then_source  # no longer need this function after all sourcing
 
 export PATH="$HOME/.cargo/bin:$HOME/.local/bin:$PATH"
