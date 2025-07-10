@@ -1,3 +1,7 @@
+
+# Kiro CLI pre block. Keep at the top of this file.
+[[ -f "${HOME}/.local/share/kiro-cli/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/.local/share/kiro-cli/shell/zshrc.pre.zsh"
+
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
@@ -6,6 +10,9 @@ ZSH_THEME="fletcherm"
 
 # Uncomment the following line to enable command auto-correction.
 ENABLE_CORRECTION="true"
+
+#export TERM='xterm-256color'
+export EDITOR='nvim'
 
 setopt HIST_EXPIRE_DUPS_FIRST    # Expire duplicate entries first when trimming history.
 setopt HIST_IGNORE_DUPS          # Don't record an entry that was just recorded again.
@@ -26,6 +33,8 @@ alias path="readlink -f"
 alias grep="noglob grep"
 alias find="noglob find"
 alias scrotc="scrot -s ~/foo.png && xclip ~/foo.png && rm ~/foo.png"
+
+
 
 export LANG=en_US.UTF-8
 
@@ -112,3 +121,39 @@ export VDPAU_DRIVER=nvidia
 export GPG_TTY=$(tty)
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs | grep ssh | cut -d ':' -f 2)
 gpg-connect-agent updatestartuptty /bye > /dev/null
+
+# if you wish to use IMDS set AWS_EC2_METADATA_DISABLED=false
+
+export AWS_EC2_METADATA_DISABLED=true
+
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - zsh)"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+alias vi="nvim"
+
+alias finch='sudo HOME=/home/smvoss DOCKER_CONFIG=/home/smvoss/.docker finch'
+
+
+# Kiro CLI post block. Keep at the bottom of this file.
+[[ -f "${HOME}/.local/share/kiro-cli/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/.local/share/kiro-cli/shell/zshrc.post.zsh"
+
+# Added by AIM CLI
+export PATH="$HOME/.aim/mcp-servers:$PATH"
+
+# Added by AIM CLI
+export PATH="/local/home/smvoss/.aim/mcp-servers:$PATH"
+export PATH="/local/home/smvoss/workplace/Beads/build/GoLang/GoLang-1.x/AL2_x86_64/DEV.STD.PTHREAD/build/bin/linux_amd64:$PATH"
+export PATH="${HOME}/go/bin:$PATH"
+
+# KMM credential proxy — per-session unique socket
+ssh() {
+    case "$1" in kmm-*|kmx-*|hardy-*)
+        command ssh -R "/home/$(whoami)/.cred-proxy-$$.sock:127.0.0.1:9999" "$@" ;;
+    *) command ssh "$@" ;;
+    esac
+}

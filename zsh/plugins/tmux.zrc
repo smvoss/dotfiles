@@ -1,13 +1,13 @@
-if command -v tmux &> /dev/null; then
-	# Auto launch tmux when connecting to terminal
-	# set NO_TMUX to a non-empty value to disable auto launching
-	if [[ -z "$NO_TMUX" && -z "$TMUX" ]]; then
-		if tmux has-session &> /dev/null; then
-			exec tmux new
-			exit
-		else
-			exec tmux attach
-			exit
-		fi
-	fi
-fi
+#if command -v tmux &> /dev/null; then
+#	# Auto launch tmux when connecting to terminal
+#	# set NO_TMUX to a non-empty value to disable auto launching
+#	if [[ -z "$NO_TMUX" && -z "$TMUX" ]]; then
+#		if tmux has-session &> /dev/null; then
+#			exec tmux new
+#			exit
+#		else
+#			exec tmux attach
+#			exit
+#		fi
+#	fi
+#fi
